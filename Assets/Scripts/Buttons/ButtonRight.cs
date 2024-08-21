@@ -1,15 +1,28 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 namespace Buttons
 {
-    public class ButtonRight : MonoBehaviour, IPointerDownHandler// required interface when using the OnPointerDown method.
+    public class ButtonRight : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
-        //Do this when the mouse is clicked over the selectable object this script is attached to.
+        private Button _buttonRight;
+
+        private void Start()
+        {
+            _buttonRight = GetComponent<Button>();
+        }
+
         public void OnPointerDown(PointerEventData eventData)
         {
             Debug.Log(this.gameObject.name + " Was Clicked.");
         }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            Debug.Log(this.gameObject.name + " Was Unclicked.");
+        }
+
     }
 }

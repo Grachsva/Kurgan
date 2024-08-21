@@ -1,10 +1,27 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-namespace Assets.Scripts.Buttons
+namespace Buttons
 {
-    public class ButtonRight : MonoBehaviour
+    public class ButtonLeft : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
+        private Button _buttonLeft;
 
+        private void Start()
+        {
+            _buttonLeft = GetComponent<Button>();
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            Debug.Log(this.gameObject.name + " Was Clicked.");
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            Debug.Log(this.gameObject.name + " Was Unclicked.");
+        }
     }
 }
