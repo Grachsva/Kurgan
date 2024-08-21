@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace Buttons
 {
-    public class ButtonRight : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    public class ButtonRight : MonoBehaviour, IPointerClickHandler // IPointerDownHandler, IPointerUpHandler
     {
         private CameraMovement _cameraMovement;
         private bool _isPressed = false;
@@ -19,19 +19,26 @@ namespace Buttons
             {
                 _cameraMovement.MoveToNextPoint();  // Перемещаем камеру вперед
             }
+            _isPressed = false;
 
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        public void OnPointerClick(PointerEventData eventData)
         {
             _isPressed = true;
             Debug.Log(this.gameObject.name + " Was Clicked.");
         }
 
-        public void OnPointerUp(PointerEventData eventData)
-        {
-            _isPressed = false;
-            Debug.Log(this.gameObject.name + " Was Unclicked.");
-        }
+        //public void OnPointerDown(PointerEventData eventData)
+        //{
+        //    _isPressed = true;
+        //    Debug.Log(this.gameObject.name + " Was Clicked.");
+        //}
+
+        //public void OnPointerUp(PointerEventData eventData)
+        //{
+        //    _isPressed = false;
+        //    Debug.Log(this.gameObject.name + " Was Unclicked.");
+        //}
     }
 }
