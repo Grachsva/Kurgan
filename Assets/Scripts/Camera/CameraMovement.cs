@@ -22,6 +22,11 @@ namespace Buttons
             SetNextPosition();
         }
 
+        private void Start()
+        {
+            _flybyPoints = FindObjectOfType
+        }
+
         private void Update()
         {
             if (_camera != null && _flybyPoints.Count > 0)

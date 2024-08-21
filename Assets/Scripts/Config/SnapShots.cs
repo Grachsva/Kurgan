@@ -7,13 +7,19 @@ public class SnapShots : MonoBehaviour
 {
     public Camera configCamera; // Камера для конфигурационной сцены
     public Camera otherCamera;  // Другая камера
-    public Button makeShapshot;  
-    public Button clearShapshot;  
+    public Button makeShapshot;
+    public Button clearShapshot;
     public string saveFileName = "snapshots.json"; // Имя файла для сохранения
 
     public List<GameObject> SnapShotobjects = new List<GameObject>();
 
     private List<CameraData> savedSnapshots = new List<CameraData>();
+
+    private void Start()
+    {
+        LoadFromFile(); // Загрузка данных из файла при старте
+        LoadSnapshots(); // Восстановление объектов из загруженных данных
+    }
 
     public void EnableConfigScene()
     {
@@ -29,16 +35,6 @@ public class SnapShots : MonoBehaviour
         }
     }
 
-    //void Update()
-    //{
-    //    // Проверяем нажатие кнопки "Запомнить" (например, клавиша Space)
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        SaveCurrentCameraState();
-    //    }
-    //}
-
-    // Сохранение текущей позиции и вращения конфигурационной камеры
     public void SaveCurrentCameraState()
     {
         CameraData snapshot = new CameraData
@@ -57,6 +53,14 @@ public class SnapShots : MonoBehaviour
     {
         var snaphotPrefab = Resources.Load<GameObject>("Config/snapshot");
         GameObject snaphotObj = Instantiate(snaphotPrefab, snapshot.position, Quaternion.Euler(snapshot.rotation));
+
+        // Получаем компонент Text в дочернем Canvas и устанавливаем порядковый номер
+        var textComponent = snaphotObj.GetComponentInChildren<Text>();
+        if (textComponent != null)
+        {
+            textComponent.text = (SnapShotobjects.Count + 1).ToString();
+        }
+
         SnapShotobjects.Add(snaphotObj);
     }
 
@@ -69,11 +73,10 @@ public class SnapShots : MonoBehaviour
         for (int i = 0; i < SnapShotobjects.Count; i++)
         {
             DestroyImmediate(SnapShotobjects[i], true);
-            SnapShotobjects.Remove(SnapShotobjects[i]);
         }
+        SnapShotobjects.Clear(); // Очищаем список объектов
     }
 
-    // Сохранение списка позиций и вращений в JSON файл
     private void SaveToFile()
     {
         string json = JsonUtility.ToJson(new CameraDataList { snapshots = savedSnapshots }, true);
@@ -81,7 +84,6 @@ public class SnapShots : MonoBehaviour
         Debug.Log("Данные сохранены в " + Path.Combine(Application.persistentDataPath, saveFileName));
     }
 
-    // Загрузка данных из JSON файла
     public void LoadFromFile()
     {
         string filePath = Path.Combine(Application.persistentDataPath, saveFileName);
@@ -93,7 +95,20 @@ public class SnapShots : MonoBehaviour
         }
     }
 
-    // Структура данных для сохранения позиции и вращения камеры
+    private void LoadSnapshots()
+    {
+        SnapShotobjects.Clear(); // Очищаем список объектов перед загрузкой
+        foreach (var snapshot in savedSnapshots)
+        {
+            MakeSnapShotObj(snapshot);
+        }
+
+        for (int i = 0; i < SnapShotobjects.Count; i++)
+        {
+            SnapShotobjects[i].SetActive(!SnapShotobjects[i].activeInHierarchy);
+        }
+    }
+
     [System.Serializable]
     public class CameraData
     {
@@ -101,7 +116,6 @@ public class SnapShots : MonoBehaviour
         public Vector3 rotation;
     }
 
-    // Список структур CameraData для сохранения в JSON
     [System.Serializable]
     public class CameraDataList
     {
