@@ -11,9 +11,12 @@ namespace Buttons
         [SerializeField] private List<Transform> _flybyPoints = new List<Transform>();
         [SerializeField] private int _currentPos;
 
+        [SerializeField] private GameObject leftButton;
+        [SerializeField] private GameObject righttButton;
+
         private Camera _camera;
         private Transform _nextPos;
-        private bool _isMoving;
+        public bool _isMoving;
         private bool _continuousMode;
 
         private void OnEnable()
@@ -48,6 +51,13 @@ namespace Buttons
             if (_isMoving)
             {
                 MoveCamera();
+                leftButton.SetActive(false);
+                righttButton.SetActive(false);
+            }
+            else
+            {
+                leftButton.SetActive(true);
+                righttButton.SetActive(true);
             }
         }
 

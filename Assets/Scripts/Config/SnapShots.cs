@@ -78,19 +78,26 @@ public class SnapShots : MonoBehaviour
 
     private void SaveToFile()
     {
+        // Использование папки StreamingAssets
+        string filePath = Path.Combine(Application.streamingAssetsPath, saveFileName);
         string json = JsonUtility.ToJson(new CameraDataList { snapshots = savedSnapshots }, true);
-        File.WriteAllText(Path.Combine(Application.persistentDataPath, saveFileName), json);
-        Debug.Log("Данные сохранены в " + Path.Combine(Application.persistentDataPath, saveFileName));
+        File.WriteAllText(filePath, json);
+        Debug.Log("Данные сохранены в " + filePath);
     }
 
     public void LoadFromFile()
     {
-        string filePath = Path.Combine(Application.persistentDataPath, saveFileName);
+        // Использование папки StreamingAssets
+        string filePath = Path.Combine(Application.streamingAssetsPath, saveFileName);
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
             CameraDataList dataList = JsonUtility.FromJson<CameraDataList>(json);
             savedSnapshots = dataList.snapshots;
+        }
+        else
+        {
+            Debug.LogWarning("Файл не найден: " + filePath);
         }
     }
 
