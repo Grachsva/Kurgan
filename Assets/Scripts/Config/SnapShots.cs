@@ -15,7 +15,7 @@ public class SnapShots : MonoBehaviour
 
     private List<CameraData> savedSnapshots = new List<CameraData>();
 
-    private void Start()
+    private void OnEnable()
     {
         LoadFromFile(); // Загрузка данных из файла при старте
         LoadSnapshots(); // Восстановление объектов из загруженных данных
@@ -53,7 +53,6 @@ public class SnapShots : MonoBehaviour
     {
         var snaphotPrefab = Resources.Load<GameObject>("Config/snapshot");
         GameObject snaphotObj = Instantiate(snaphotPrefab, snapshot.position, Quaternion.Euler(snapshot.rotation));
-
         // Получаем компонент Text в дочернем Canvas и устанавливаем порядковый номер
         var textComponent = snaphotObj.GetComponentInChildren<Text>();
         if (textComponent != null)

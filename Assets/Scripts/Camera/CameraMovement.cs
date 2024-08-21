@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Buttons
 {
@@ -17,104 +18,68 @@ namespace Buttons
 
         private void OnEnable()
         {
+            FindSnapshots();
             _camera = Camera.main;
             _camera.transform.position = _startPos.position;
-            SetNextPosition();
         }
 
-        private void Start()
+        private void FindSnapshots()
         {
-            _flybyPoints = FindObjectOfType
+            _flybyPoints.Clear();
+            // Находим все объекты типа Snapshot, включая неактивные
+            var snapshotObjects = GameObject.FindObjectsOfType<Snapshot>(true);
+
+            // Очищаем текущий список и заполняем его трансформами найденных объектов
+            _flybyPoints.Clear();
+            //foreach (var snapshot in snapshotObjects)
+            //{
+            //    _flybyPoints.Add(snapshot.transform);
+            //}
+            // Заполняем список в обратном порядке
+            for (int i = snapshotObjects.Length - 1; i >= 0; i--)
+            {
+                _flybyPoints.Add(snapshotObjects[i].transform);
+            }
+            _startPos = _flybyPoints[0];
         }
 
         private void Update()
         {
-            if (_camera != null && _flybyPoints.Count > 0)
+            if (_isMoving)
             {
-                float deltaSpeed = _speedMotion * Time.deltaTime;
-
-                // Режим активации при зажатии клавиши
-                if (Input.GetKey(KeyCode.H) || Input.GetKey(KeyCode.J))
-                {
-                    if (!_continuousMode)
-                    {
-                        _continuousMode = true; // Включаем непрерывный режим
-                        UpdateNextPosition(Input.GetKey(KeyCode.H) ? 1 : -1);
-                        _isMoving = true;
-                    }
-                }
-
-                // Режим активации при одиночном нажатии клавиши
-                if (Input.GetKeyDown(KeyCode.H))
-                {
-                    if (_continuousMode)
-                    {
-                        _continuousMode = false; // Выключаем непрерывный режим
-                    }
-                    else
-                    {
-                        UpdateNextPosition(1);
-                        _isMoving = true;
-                    }
-                }
-                else if (Input.GetKeyDown(KeyCode.J))
-                {
-                    if (_continuousMode)
-                    {
-                        _continuousMode = false; // Выключаем непрерывный режим
-                    }
-                    else
-                    {
-                        UpdateNextPosition(-1);
-                        _isMoving = true;
-                    }
-                }
-
-                // Выполняем перемещение, если оно активно
-                if (_isMoving)
-                {
-                    MoveCamera(deltaSpeed);
-                }
+                MoveCamera();
             }
         }
 
-        private void MoveCamera(float deltaSpeed)
+        public void MoveToNextPoint()
         {
-            if (_nextPos == null) return;
+            if (_isMoving) return;
 
-            _camera.transform.position = Vector3.MoveTowards(_camera.transform.position, _nextPos.position, deltaSpeed);
+            _currentPos = (_currentPos + 1) % _flybyPoints.Count;
+            _isMoving = true;
+        }
 
-            if (Vector3.Distance(_camera.transform.position, _nextPos.position) < 0.1f)
+        public void MoveToPreviousPoint()
+        {
+            if (_isMoving) return;
+
+            _currentPos = (_currentPos - 1 + _flybyPoints.Count) % _flybyPoints.Count;
+            _isMoving = true;
+        }
+
+        private void MoveCamera()
+        {
+            Transform target = _flybyPoints[_currentPos];
+            float step = _speedMotion * Time.deltaTime;
+
+            _camera.transform.position = Vector3.Slerp(_camera.transform.position, target.position, step);
+            _camera.transform.rotation = Quaternion.Slerp(_camera.transform.rotation, target.rotation, step);
+
+            if (Vector3.Distance(_camera.transform.position, target.position) < 0.01f &&
+                Quaternion.Angle(_camera.transform.rotation, target.rotation) < 0.01f)
             {
                 _isMoving = false;
-                SetNextPosition();
-
-                // Если в режиме непрерывного движения, продолжаем к следующей точке
-                if (_continuousMode)
-                {
-                    _isMoving = true;
-                    UpdateNextPosition(Input.GetKey(KeyCode.H) ? 1 : -1);
-                }
             }
-        }
-
-        private void SetNextPosition()
-        {
-            _nextPos = _flybyPoints[_currentPos];
-        }
-
-        private void UpdateNextPosition(int direction)
-        {
-            _currentPos += direction;
-            if (_currentPos >= _flybyPoints.Count)
-            {
-                _currentPos = 0;
-            }
-            else if (_currentPos < 0)
-            {
-                _currentPos = _flybyPoints.Count - 1;
-            }
-            SetNextPosition();
         }
     }
 }

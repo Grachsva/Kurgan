@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 4
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -1247,6 +1247,7 @@ GameObject:
   - component: {fileID: 113016726}
   - component: {fileID: 113016725}
   - component: {fileID: 113016724}
+  - component: {fileID: 113016727}
   m_Layer: 5
   m_Name: ButtonLeft
   m_TagString: Untagged
@@ -1356,6 +1357,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113016722}
   m_CullTransparentMesh: 1
+--- !u!114 &113016727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113016722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a378b3307e17346b0c5440a02ed021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &118065521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4815,7 +4828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &517588633
 Transform:
   m_ObjectHideFlags: 0
@@ -6170,7 +6183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &605120429
 Transform:
   m_ObjectHideFlags: 0
@@ -8005,7 +8018,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &741320957
 Transform:
   m_ObjectHideFlags: 0
@@ -9166,7 +9179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &828042009
 Transform:
   m_ObjectHideFlags: 0
@@ -9340,7 +9353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &833223751
 Transform:
   m_ObjectHideFlags: 0
@@ -13098,7 +13111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1112452275
 Transform:
   m_ObjectHideFlags: 0
@@ -23824,7 +23837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1822977780
 Transform:
   m_ObjectHideFlags: 0
@@ -27493,16 +27506,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff12a05771cc864cac219bb7bec5c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedMotion: 40
+  _speedMotion: 5
   _startPos: {fileID: 1595106654}
-  _flybyPoints:
-  - {fileID: 1595106654}
-  - {fileID: 833223751}
-  - {fileID: 517588633}
-  - {fileID: 828042009}
-  - {fileID: 741320957}
-  - {fileID: 1822977780}
-  - {fileID: 605120429}
+  _flybyPoints: []
   _currentPos: 0
 --- !u!1 &2111680893
 GameObject:
