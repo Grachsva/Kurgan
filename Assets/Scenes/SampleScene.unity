@@ -11238,14 +11238,14 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
+  m_projectionMatrixMode: 2
   m_GateFitMode: 2
   m_FOVAxisMode: 0
-  m_Iso: 200
+  m_Iso: 342
   m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
+  m_Aperture: 10
+  m_FocusDistance: 28.27
+  m_FocalLength: 15.752253
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -11259,11 +11259,11 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 1076.82
-  field of view: 60
+  far clip plane: 1065.36
+  field of view: 74.6
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -11273,7 +11273,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 0
-  m_AllowDynamicResolution: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -11286,13 +11286,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.73692524, z: -0, w: 0.6759743}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.10048362, y: -0.7152121, z: 0.105128825, w: 0.6836101}
+  m_LocalPosition: {x: 62.28, y: 6.23, z: -12.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -94.94, z: 0}
+  m_LocalEulerAnglesHint: {x: 16.724, y: -92.588, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11450,8 +11450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ExecuteInEditor: 1
-  m_Bindings:
-  - {fileID: 963194230}
+  m_Bindings: []
   m_VisualEffect: {fileID: 963194233}
 --- !u!73398921 &963194232
 VFXRenderer:
@@ -27506,7 +27505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff12a05771cc864cac219bb7bec5c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedMotion: 1
+  _speedMotion: 10
   _startPos: {fileID: 1595106654}
   _flybyPoints: []
   _currentPos: 0
