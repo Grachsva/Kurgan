@@ -6,7 +6,7 @@ namespace Buttons
 {
     public class CameraMovement : MonoBehaviour
     {
-        [SerializeField] private float _speedMotion;
+        //[SerializeField] private float _speedMotion;
         [SerializeField] private Transform _startPos;
         [SerializeField] private List<Transform> _flybyPoints = new List<Transform>();
         [SerializeField] private int _currentPos;
@@ -19,11 +19,12 @@ namespace Buttons
         public bool _isMoving;
         private bool _continuousMode;
 
-        private void OnEnable()
+        private void Start()
         {
             FindSnapshots();
             _camera = Camera.main;
             _camera.transform.position = _startPos.position;
+            _camera.transform.rotation = _startPos.rotation;
         }
 
         private void FindSnapshots()
@@ -80,7 +81,7 @@ namespace Buttons
         private void MoveCamera()
         {
             Transform target = _flybyPoints[_currentPos];
-            float step = _speedMotion * Time.deltaTime;
+            float step = PlayerPrefs.GetInt("CameraSpeed") * Time.deltaTime;
 
             _camera.transform.position = Vector3.Slerp(_camera.transform.position, target.position, step);
             _camera.transform.rotation = Quaternion.Slerp(_camera.transform.rotation, target.rotation, step);

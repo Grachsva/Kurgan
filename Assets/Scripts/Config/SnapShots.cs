@@ -9,6 +9,8 @@ public class SnapShots : MonoBehaviour
     public Camera otherCamera;  // Другая камера
     public Button makeShapshot;
     public Button clearShapshot;
+    public GameObject speedSlider;
+    public GameObject speedText;
     public string saveFileName = "snapshots.json"; // Имя файла для сохранения
 
     public List<GameObject> SnapShotobjects = new List<GameObject>();
@@ -28,6 +30,9 @@ public class SnapShots : MonoBehaviour
         otherCamera.gameObject.SetActive(!otherCamera.gameObject.activeInHierarchy);
         makeShapshot.gameObject.SetActive(!makeShapshot.gameObject.activeInHierarchy);
         clearShapshot.gameObject.SetActive(!clearShapshot.gameObject.activeInHierarchy);
+
+        speedSlider.gameObject.SetActive(!speedSlider.gameObject.activeInHierarchy);
+        speedText.gameObject.SetActive(!speedText.gameObject.activeInHierarchy);
 
         for (int i = 0; i < SnapShotobjects.Count; i++)
         {
