@@ -5,21 +5,26 @@ using UnityEngine.UI;
 
 public class DistanceHide : MonoBehaviour
 {
-    // Коэффициенты прозрачности
-    [SerializeField] private float minTransparency = 0.0f; // Минимальная прозрачность
-    [SerializeField] private float maxTransparency = 1.0f; // Максимальная прозрачность
+    // Размер фрусума
+    [SerializeField] private float frustumFieldOfView = 60.0f;  // Поле зрения фрусума
+    [SerializeField] private float frustumAspect = 1.0f;        // Соотношение сторон
+    [SerializeField] private float frustumNear = 0.3f;          // Ближайшая плоскость
+    [SerializeField] private float frustumFar = 10.0f;          // Дальняя плоскость
+    [SerializeField]
+    private bool isInsideFrustum = false;
 
-    [SerializeField] private float dist;
-    // Дистанция
-    [SerializeField] private float minDistance = 5.0f;  // Расстояние, при котором используется минимальная прозрачность
-    [SerializeField] private float maxDistance = 20.0f; // Расстояние, при котором используется максимальная прозрачность
-    float alpha;
+    private void OnDrawGizmos()
+    {
+        // Нарисовать фрумум для наглядности в редакторе
+        Gizmos.color = Color.green;
+        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+        Gizmos.DrawFrustum(Vector3.zero, frustumFieldOfView, frustumFar, frustumNear, frustumAspect);
+    }
 
     private void Update()
     {
-        // Вычисление расстояния от камеры до объекта
-        dist = Vector3.Distance(Camera.main.transform.position, transform.position);
-        print("Distance to other: " + dist);
+        // Проверка, находится ли камера внутри фрусума
+        isInsideFrustum = CheckIfInsideFrustum();
 
         // Получение всех компонентов Image, находящихся внутри объекта и его потомков
         Image[] images = GetComponentsInChildren<Image>();
@@ -27,19 +32,8 @@ public class DistanceHide : MonoBehaviour
         // Если массив изображений не пустой
         if (images.Length > 0)
         {
-            // Вычисление прозрачности на основе расстояния и настроек
-            //float t = Mathf.InverseLerp(minDistance, maxDistance, dist); // Нормализация расстояния между minDistance и maxDistance
-            //float alpha = Mathf.Lerp(minTransparency, maxTransparency, t); // Интерполяция прозрачности
-
-            // Ограничение значения alpha, чтобы за пределами диапазона прозрачность оставалась постоянной
-            if (dist < minDistance)
-            {
-                alpha = maxTransparency;
-            }
-            else if (dist > maxDistance)
-            {
-                alpha = minTransparency; 
-            }
+            // Установка прозрачности в зависимости от того, находится ли камера внутри фрусума
+            float alpha = isInsideFrustum ? 1.0f : 0.0f;
 
             // Применение новой прозрачности ко всем найденным изображениям
             foreach (Image image in images)
@@ -49,5 +43,35 @@ public class DistanceHide : MonoBehaviour
                 image.color = color;
             }
         }
+    }
+
+    private bool CheckIfInsideFrustum()
+    {
+        // Вычисление расстояния от камеры до центра фрусума
+        Vector3 cameraPosition = Camera.main.transform.position;
+        Vector3 localCameraPosition = transform.InverseTransformPoint(cameraPosition);
+
+        // Проверка, находится ли камера внутри фрусума по расстоянию
+        if (localCameraPosition.z > frustumNear && localCameraPosition.z < frustumFar)
+        {
+            float halfHeightAtNear = Mathf.Tan(frustumFieldOfView * 0.5f * Mathf.Deg2Rad) * frustumNear;
+            float halfWidthAtNear = halfHeightAtNear * frustumAspect;
+
+            float halfHeightAtFar = Mathf.Tan(frustumFieldOfView * 0.5f * Mathf.Deg2Rad) * frustumFar;
+            float halfWidthAtFar = halfHeightAtFar * frustumAspect;
+
+            // Линейная интерполяция размеров для z текущей позиции камеры
+            float lerpFactor = (localCameraPosition.z - frustumNear) / (frustumFar - frustumNear);
+            float currentHalfHeight = Mathf.Lerp(halfHeightAtNear, halfHeightAtFar, lerpFactor);
+            float currentHalfWidth = Mathf.Lerp(halfWidthAtNear, halfWidthAtFar, lerpFactor);
+
+            // Проверка, попадает ли камера в текущие размеры фрусума
+            if (Mathf.Abs(localCameraPosition.x) < currentHalfWidth && Mathf.Abs(localCameraPosition.y) < currentHalfHeight)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
