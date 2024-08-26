@@ -9,10 +9,11 @@ namespace Snapshots
     {
         public Camera configCamera; // Камера для конфигурационной сцены
         public Camera otherCamera;  // Другая камера
-        public Button makeShapshot;
-        public Button clearShapshot;
-        public GameObject speedSlider;
-        public GameObject speedText;
+        public GameObject canvasConfig;
+        //public Button makeShapshot;
+        //public Button clearShapshot;
+        //public GameObject speedSlider;
+        //public GameObject speedText;
         public string saveFileName = "snapshots.json"; // Имя файла для сохранения
 
         public List<GameObject> SnapShotobjects = new List<GameObject>();
@@ -33,13 +34,15 @@ namespace Snapshots
         public void EnableConfigScene()
         {
             // Включаем конфигурационную камеру и выключаем другую
+            canvasConfig.gameObject.SetActive(!canvasConfig.gameObject.activeInHierarchy);
+
             configCamera.gameObject.SetActive(!configCamera.gameObject.activeInHierarchy);
             otherCamera.gameObject.SetActive(!otherCamera.gameObject.activeInHierarchy);
-            makeShapshot.gameObject.SetActive(!makeShapshot.gameObject.activeInHierarchy);
-            clearShapshot.gameObject.SetActive(!clearShapshot.gameObject.activeInHierarchy);
+            //makeShapshot.gameObject.SetActive(!makeShapshot.gameObject.activeInHierarchy);
+            //clearShapshot.gameObject.SetActive(!clearShapshot.gameObject.activeInHierarchy);
 
-            speedSlider.gameObject.SetActive(!speedSlider.gameObject.activeInHierarchy);
-            speedText.gameObject.SetActive(!speedText.gameObject.activeInHierarchy);
+            //speedSlider.gameObject.SetActive(!speedSlider.gameObject.activeInHierarchy);
+            //speedText.gameObject.SetActive(!speedText.gameObject.activeInHierarchy);
 
             for (int i = 0; i < SnapShotobjects.Count; i++)
             {
