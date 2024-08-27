@@ -10,6 +10,8 @@ namespace StateMachine
         private Dictionary<Image, Sprite> SpritesForImagesEnabled = new Dictionary<Image, Sprite>();
         private Dictionary<Image, Sprite> SpritesForImagesDisabled = new Dictionary<Image, Sprite>();
 
+        [SerializeField] private GameObject _canvasVideo;
+
         [SerializeField] private GameObject _markers;
 
         [SerializeField] private Button _buttonArrowLeft;
@@ -61,12 +63,14 @@ namespace StateMachine
                 case States.WithoutMarkers:
                     ActivateButtons(SpritesForImagesEnabled);
                     MarkersVisible(false);
+                    _canvasVideo.SetActive(false);
                     break;
 
                 case States.WithMarkers:
                     ActivateButtons(SpritesForImagesEnabled);
                     _buttonSlider.GetComponent<Image>().sprite = _infoSelected; // Желтая кнопка Info
                     MarkersVisible(true);
+                    _canvasVideo.SetActive(false);
                     break;
 
                 case States.Slider:
@@ -77,6 +81,7 @@ namespace StateMachine
                 case States.VideoPlayer:
                     ActivateButtons(SpritesForImagesDisabled);
                     _buttonVideoPlayer.GetComponent<Image>().sprite = _close; // Кнопка крестик вместо Play
+                    _canvasVideo.SetActive(true);
                     break;
             }
         }
@@ -86,6 +91,7 @@ namespace StateMachine
             foreach (var button in sprites.Keys)
             {
                 button.sprite = sprites[button];
+                print(sprites[button].name + _currentState);
             }
         }
 

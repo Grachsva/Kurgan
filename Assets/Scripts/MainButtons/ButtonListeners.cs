@@ -37,9 +37,14 @@ namespace StateMachine
         {
             if (_stateMachine != null)
             {
+                States lastState = _stateMachine._currentState;
                 if (_stateMachine._currentState == States.WithoutMarkers || _stateMachine._currentState == States.WithMarkers)
                 {
                     _stateMachine.ChangeState(States.VideoPlayer);
+                }
+                else if(_stateMachine._currentState == States.VideoPlayer)
+                {
+                    _stateMachine.ChangeState(lastState);
                 }
             }
         }
@@ -56,6 +61,10 @@ namespace StateMachine
                 {
                     _stateMachine.ChangeState(States.WithoutMarkers);
                 }
+                else if (_stateMachine._currentState == States.Slider)
+                {
+                    _stateMachine.ChangeState(States.WithMarkers);
+                }
             }
         }
 
@@ -66,10 +75,6 @@ namespace StateMachine
                 if (_stateMachine._currentState == States.WithMarkers)
                 {
                     _stateMachine.ChangeState(States.Slider);
-                }
-                if (_stateMachine._currentState == States.Slider)
-                {
-                    _stateMachine.ChangeState(States.WithMarkers);
                 }
             }
         }
