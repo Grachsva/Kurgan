@@ -1,3 +1,4 @@
+using Buttons;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -61,37 +62,56 @@ namespace StateMachine
             switch (state)
             {
                 case States.WithoutMarkers:
-                    ActivateButtons(SpritesForImagesEnabled);
+                    ActivateButtons(SpritesForImagesEnabled, true);
                     MarkersVisible(false);
                     _canvasVideo.SetActive(false);
                     break;
 
                 case States.WithMarkers:
-                    ActivateButtons(SpritesForImagesEnabled);
+                    ActivateButtons(SpritesForImagesEnabled, true);
                     _buttonSlider.GetComponent<Image>().sprite = _infoSelected; // Желтая кнопка Info
                     MarkersVisible(true);
                     _canvasVideo.SetActive(false);
                     break;
 
                 case States.Slider:
-                    ActivateButtons(SpritesForImagesDisabled);
+                    ActivateButtons(SpritesForImagesDisabled, false);
                     _buttonSlider.GetComponent<Image>().sprite = _close; // Кнопка крестик вместо Info
+                    MarkersVisible(false);
                     break;
 
                 case States.VideoPlayer:
-                    ActivateButtons(SpritesForImagesDisabled);
+                    ActivateButtons(SpritesForImagesDisabled, false);
                     _buttonVideoPlayer.GetComponent<Image>().sprite = _close; // Кнопка крестик вместо Play
                     _canvasVideo.SetActive(true);
+                    MarkersVisible(false);
                     break;
             }
         }
 
-        private void ActivateButtons(Dictionary<Image, Sprite> sprites)
+        private void ActivateButtons(Dictionary<Image, Sprite> sprites, bool disableInteractable)
         {
             foreach (var button in sprites.Keys)
             {
                 button.sprite = sprites[button];
-                print(sprites[button].name + _currentState);
+                print(button.name);
+                ButtonLeft buttonLeft = button.GetComponent<ButtonLeft>();
+                ButtonRight buttonRight = button.GetComponent<ButtonRight>();
+
+                if (buttonLeft != null)
+                {
+                    buttonLeft.enabled = disableInteractable;
+                }
+                else if (buttonRight != null)
+                {
+                    buttonRight.enabled = disableInteractable;
+                }
+
+                //if (button.name == "ButtonLeft" || button.name == "ButtonRight")
+                //{
+                //    button.GetComponent<Button>().interactable = disableInteractable;
+                //    print(button.name + " " + disableInteractable);
+                //}
             }
         }
 

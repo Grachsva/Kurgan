@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditorInternal.VersionControl.ListControl;
 
 namespace StateMachine
 {
@@ -16,9 +17,11 @@ namespace StateMachine
         //[SerializeField] private Button buttonRightArrow;
 
         private StateMachineButtons _stateMachine;
+        private States _lastState;
 
         private void Start()
         {
+            _lastState = States.WithoutMarkers;
             _stateMachine = GetComponent<StateMachineButtons>();
 
             //buttonLeftArrow.onClick.AddListener(() => GetComponent<StateMachineButtons>().ChangeState(States.WithoutMarkers));
@@ -37,14 +40,14 @@ namespace StateMachine
         {
             if (_stateMachine != null)
             {
-                States lastState = _stateMachine._currentState;
                 if (_stateMachine._currentState == States.WithoutMarkers || _stateMachine._currentState == States.WithMarkers)
                 {
+                    _lastState = _stateMachine._currentState;
                     _stateMachine.ChangeState(States.VideoPlayer);
                 }
                 else if(_stateMachine._currentState == States.VideoPlayer)
                 {
-                    _stateMachine.ChangeState(lastState);
+                    _stateMachine.ChangeState(_lastState);
                 }
             }
         }
