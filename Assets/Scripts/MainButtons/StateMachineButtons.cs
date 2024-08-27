@@ -1,118 +1,105 @@
 using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-[ExecuteAlways]
-//[InitializeOnLoad]
-public class StateMachineButtons : MonoBehaviour
+namespace StateMachine
 {
-    Dictionary<Image, Sprite> SpritesForImagesEnabled = new Dictionary<Image, Sprite> ();
-    Dictionary<Image, Sprite> SpritesForImagesDisabled = new Dictionary<Image, Sprite> ();
-
-    public States currentState;
-
-    [SerializeField] private GameObject _markers;
-
-    [SerializeField] private Button _buttonArrowLeft;
-    [SerializeField] private Button _buttonArrowRight;
-
-    [SerializeField] private Button _buttonSlider;
-    [SerializeField] private Button _buttonVideoPlayer;
-    //--------------------------------------------- Enable
-    [SerializeField] private Sprite _arrowLeft;
-    [SerializeField] private Sprite _arrowRight;
-
-    [SerializeField] private Sprite _info;
-    [SerializeField] private Sprite _play;
-
-    [SerializeField] private Sprite _close;
-    //--------------------------------------------- Disable
-    [SerializeField] private Sprite _arrowLeftDis;
-    [SerializeField] private Sprite _arrowRightDis;
-
-    [SerializeField] private Sprite _infoDis;
-    [SerializeField] private Sprite _playDis;
-
-    //List<Image> _imagesInMainButtons = new List<Image>();
-
-    private void Start()
+    [ExecuteAlways]
+    public class StateMachineButtons : MonoBehaviour
     {
-        //_imagesInMainButtons.Add(); // 0
-        //_imagesInMainButtons.Add(_buttonVideoPlayer.GetComponent<Image>()); // 1
-        //_imagesInMainButtons.Add(_buttonArrowLeft.GetComponent<Image>()); // 2
-        //_imagesInMainButtons.Add(_buttonArrowRight.GetComponent<Image>()); // 3
+        private Dictionary<Image, Sprite> SpritesForImagesEnabled = new Dictionary<Image, Sprite>();
+        private Dictionary<Image, Sprite> SpritesForImagesDisabled = new Dictionary<Image, Sprite>();
 
-        //--------------------------------------------- Enable
-        SpritesForImagesEnabled.Add(_buttonSlider.GetComponent<Image>(), _info); // 0
-        SpritesForImagesEnabled.Add(_buttonVideoPlayer.GetComponent<Image>(), _play); // 1
+        [SerializeField] private GameObject _markers;
 
-        SpritesForImagesEnabled.Add(_buttonArrowLeft.GetComponent<Image>(), _arrowLeft); // 2
-        SpritesForImagesEnabled.Add(_buttonArrowRight.GetComponent<Image>(), _arrowRight); // 3
-        //--------------------------------------------- Disable
-        SpritesForImagesDisabled.Add(_buttonSlider.GetComponent<Image>(), _arrowLeftDis); // 0
-        SpritesForImagesDisabled.Add(_buttonVideoPlayer.GetComponent<Image>(), _arrowRightDis); // 1
+        [SerializeField] private Button _buttonArrowLeft;
+        [SerializeField] private Button _buttonSlider;
+        [SerializeField] private Button _buttonVideoPlayer;
+        [SerializeField] private Button _buttonArrowRight;
 
-        SpritesForImagesDisabled.Add(_buttonArrowLeft.GetComponent<Image>(), _infoDis); // 2
-        SpritesForImagesDisabled.Add(_buttonArrowRight.GetComponent<Image>(), _playDis); // 3
-    }
+        //--------------------------------------------- Enabled Sprites
+        [SerializeField] private Sprite _arrowLeft;
+        [SerializeField] private Sprite _info;
+        [SerializeField] private Sprite _infoSelected; // Желтая кнопка Info
+        [SerializeField] private Sprite _play;
+        [SerializeField] private Sprite _arrowRight;
 
-    public void ChangeState(States state)
-    {
-        switch (SpritesForImagesEnabled.)
+        [SerializeField] private Sprite _close; // Спрайт крестика
+
+        //--------------------------------------------- Disabled Sprites
+        [SerializeField] private Sprite _arrowLeftDis;
+        [SerializeField] private Sprite _infoDis;
+        [SerializeField] private Sprite _playDis;
+        [SerializeField] private Sprite _arrowRightDis;
+
+        public States _currentState = States.WithoutMarkers;
+
+        private void Start()
         {
-            case States.WithoutMarkers:
-                Debug.Log("WithoutMarkers is enabled");
-                //Debug.Log("Дизактивируем кнопки");
-                DisactivateButtons();
-                break;
+            // Enabled sprites
+            SpritesForImagesEnabled.Add(_buttonArrowLeft.GetComponent<Image>(), _arrowLeft);
+            SpritesForImagesEnabled.Add(_buttonSlider.GetComponent<Image>(), _info);
+            SpritesForImagesEnabled.Add(_buttonVideoPlayer.GetComponent<Image>(), _play);
+            SpritesForImagesEnabled.Add(_buttonArrowRight.GetComponent<Image>(), _arrowRight);
 
-            case States.WithMarkers:
-                Debug.Log("WithMarkers is enabled");
-                //Debug.Log("Дизактивируем кнопки");
-                //Debug.Log("Делаем кнопку меток активной");
-                //Debug.Log("Показываем метки на карте");
-                break;
+            // Disabled sprites
+            SpritesForImagesDisabled.Add(_buttonArrowLeft.GetComponent<Image>(), _arrowLeftDis);
+            SpritesForImagesDisabled.Add(_buttonSlider.GetComponent<Image>(), _infoDis);
+            SpritesForImagesDisabled.Add(_buttonVideoPlayer.GetComponent<Image>(), _playDis);
+            SpritesForImagesDisabled.Add(_buttonArrowRight.GetComponent<Image>(), _arrowRightDis);
 
-            case States.Slider:
-                Debug.Log("VideoPlayer is enabled");
-                //Debug.Log("Дизактивируем кнопки");
-                //Debug.Log("Делаем кнопку слайдер активной (крестик)");
-                break;
+            // Устанавливаем начальное состояние
+            ChangeState(_currentState);
+        }
 
-            case States.VideoPlayer:
-                Debug.Log("VideoPlayer is enabled");
-                //Debug.Log("Дизактивируем кнопки");
-                //Debug.Log("Делаем кнопку видео активной (крестик)");
-                break;
+        public void ChangeState(States state)
+        {
+            _currentState = state;
+
+            switch (state)
+            {
+                case States.WithoutMarkers:
+                    ActivateButtons(SpritesForImagesEnabled);
+                    MarkersVisible(false);
+                    break;
+
+                case States.WithMarkers:
+                    ActivateButtons(SpritesForImagesEnabled);
+                    _buttonSlider.GetComponent<Image>().sprite = _infoSelected; // Желтая кнопка Info
+                    MarkersVisible(true);
+                    break;
+
+                case States.Slider:
+                    ActivateButtons(SpritesForImagesDisabled);
+                    _buttonSlider.GetComponent<Image>().sprite = _close; // Кнопка крестик вместо Info
+                    break;
+
+                case States.VideoPlayer:
+                    ActivateButtons(SpritesForImagesDisabled);
+                    _buttonVideoPlayer.GetComponent<Image>().sprite = _close; // Кнопка крестик вместо Play
+                    break;
+            }
+        }
+
+        private void ActivateButtons(Dictionary<Image, Sprite> sprites)
+        {
+            foreach (var button in sprites.Keys)
+            {
+                button.sprite = sprites[button];
+            }
+        }
+
+        private void MarkersVisible(bool Bool)
+        {
+            _markers.SetActive(Bool);
         }
     }
 
-    private void DisactivateButtons()
+    public enum States
     {
-        foreach (var button in SpritesForImagesEnabled.Keys)
-        {
-            button.sprite = SpritesForImagesEnabled[button];
-        }
+        WithoutMarkers,
+        WithMarkers,
+        Slider,
+        VideoPlayer,
     }
-
-    private void ChangeSpriteOnButtons(Sprite sprite, Button targetButton)
-    {
-
-    }
-
-    private void MarkersVisible()
-    {
-        _markers.SetActive(!_markers.activeInHierarchy);
-    }
-}
-
-public enum States
-{
-    WithoutMarkers,
-    WithMarkers,
-    Slider,
-    VideoPlayer,
 }
