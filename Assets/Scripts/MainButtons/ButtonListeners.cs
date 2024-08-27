@@ -32,7 +32,6 @@ namespace StateMachine
             {
                 buttonsMarkers[i].onClick.AddListener(OnMarkerClick);
             }
-
             //buttonRightArrow.onClick.AddListener(() => GetComponent<StateMachineButtons>().ChangeState(States.Slider));
         }
 
