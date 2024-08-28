@@ -16,7 +16,8 @@ namespace StateMachine
         [SerializeField] private List<Button> buttonsMarkers = new List<Button>();
 
         //для канвасов (клик в пустом месте) и крестиков в углу канвасов
-        [SerializeField] private List<Button> otherVariantCloseCanvas = new List<Button>();
+        [SerializeField] private List<Button> otherVariantCloseCanvasInfo = new List<Button>();
+        [SerializeField] private List<Button> otherVariantCloseCanvasVideo = new List<Button>();
 
         //[SerializeField] private Button buttonCloseCanvas;
 
@@ -32,9 +33,14 @@ namespace StateMachine
             buttonPlay.onClick.AddListener(OnPlayButtonClick);
             buttonInfo.onClick.AddListener(OnInfoButtonClick);
 
-            foreach (var button in otherVariantCloseCanvas)
+            foreach (var button in otherVariantCloseCanvasInfo)
             {
                 button.onClick.AddListener(OnInfoButtonClick);
+            }
+
+            foreach (var button in otherVariantCloseCanvasVideo)
+            {
+                button.onClick.AddListener(OnPlayButtonClick);
             }
 
             for (int i = 0; i < buttonsMarkers.Count; i++)
