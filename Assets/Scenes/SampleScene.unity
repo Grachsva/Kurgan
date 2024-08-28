@@ -1257,6 +1257,17 @@ Transform:
   - {fileID: 651416980}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &77204365 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 21721208069170253, guid: a53d38589fd9d0d47a33fa96793c9608, type: 3}
+  m_PrefabInstance: {fileID: 5434098056717647580}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &80052521 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: db4122d3be24b8f4891c3e01fcca9ed2, type: 3}
@@ -9841,6 +9852,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasVideo: {fileID: 704204010}
+  _canvasList:
+  - {fileID: 5434098056717647581}
   _markers: {fileID: 484173769}
   _buttonArrowLeft: {fileID: 113016724}
   _buttonSlider: {fileID: 554344826}
@@ -9895,6 +9908,7 @@ MonoBehaviour:
   - {fileID: 6131288964518298537}
   - {fileID: 6131288965633935686}
   - {fileID: 6131288966436648295}
+  buttonCloseCanvas: {fileID: 77204365}
 --- !u!1001 &773067190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28777,7 +28791,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967504299}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af10a79a52b3e2647bdd0a4d385d1e3d, type: 3}
   m_Name: 
@@ -28790,6 +28804,7 @@ MonoBehaviour:
   DivisionalGun: []
   MainManument: []
   SecondManument: []
+  VideoFiles: []
 --- !u!4 &1967504301
 Transform:
   m_ObjectHideFlags: 0
@@ -32317,7 +32332,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6392154693064692010}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5434098056717647581}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &2574452697471453340
 GameObject:
   m_ObjectHideFlags: 0
@@ -33353,12 +33380,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 21721208069170253, guid: a53d38589fd9d0d47a33fa96793c9608, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5434098056717647581}
+    - target: {fileID: 21721208069170253, guid: a53d38589fd9d0d47a33fa96793c9608, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 5434098056717647582}
     - target: {fileID: 21721208069170253, guid: a53d38589fd9d0d47a33fa96793c9608, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 21721208069170253, guid: a53d38589fd9d0d47a33fa96793c9608, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 21721208069170253, guid: a53d38589fd9d0d47a33fa96793c9608, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName

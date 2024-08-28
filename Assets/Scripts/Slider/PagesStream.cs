@@ -21,6 +21,8 @@ namespace SliderPages
         private string pathToMainManument = "7.MainManument";
         private string pathToSecondManument = "8.SecondManument";
 
+        private string pathToVideo = "Video";
+
         [SerializeField] public List<Sprite> EntryWhiteMemorialSprites = new List<Sprite>();
         [SerializeField] public List<Sprite> EternalFlame = new List<Sprite>();
         [SerializeField] public List<Sprite> FiveBlackMemorials = new List<Sprite>();
@@ -29,6 +31,9 @@ namespace SliderPages
         [SerializeField] public List<Sprite> DivisionalGun = new List<Sprite>();
         [SerializeField] public List<Sprite> MainManument = new List<Sprite>();
         [SerializeField] public List<Sprite> SecondManument = new List<Sprite>();
+
+        [SerializeField] public List<string> VideoFiles = new List<string>();
+
 
         private void Start()
         {
@@ -40,6 +45,8 @@ namespace SliderPages
             GetFileLocation(pathTo76mmDivisionalGun, DivisionalGun);
             GetFileLocation(pathToMainManument, MainManument);
             GetFileLocation(pathToSecondManument, SecondManument);
+
+            GetVideoFileLocation(pathToVideo, VideoFiles);
 
             e_streamsLoaded?.Invoke();
         }
@@ -83,6 +90,32 @@ namespace SliderPages
             }
 
             //Debug.Log("Loaded " + listSprites.Count + " sprites.");
+        }
+
+        public void GetVideoFileLocation(string pathToVideos, List<string> videoList)
+        {
+            // Получаем путь к директории в StreamingAssets
+            string fullPath = Path.Combine(Application.streamingAssetsPath, pathToVideos);
+            DirectoryInfo directoryInfo = new DirectoryInfo(fullPath);
+
+            // Проверяем, существует ли директория
+            if (!directoryInfo.Exists)
+            {
+                //Debug.LogError("Directory not found: " + fullPath);
+                return;
+            }
+
+            // Получаем все файлы .mp4 в директории
+            FileInfo[] allFiles = directoryInfo.GetFiles("*.mp4", SearchOption.TopDirectoryOnly);
+
+            // Добавляем пути к файлам в список
+            foreach (FileInfo file in allFiles)
+            {
+                string filePath = file.FullName;
+                videoList.Add(filePath);
+            }
+
+            //Debug.Log("Loaded " + videoList.Count + " video files.");
         }
     }
 }

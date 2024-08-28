@@ -1,6 +1,7 @@
 using Buttons;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace StateMachine
@@ -12,6 +13,7 @@ namespace StateMachine
         private Dictionary<Image, Sprite> SpritesForImagesDisabled = new Dictionary<Image, Sprite>();
 
         [SerializeField] private GameObject _canvasVideo;
+        [SerializeField] List<GameObject> _canvasList = new List<GameObject>();    
 
         [SerializeField] private GameObject _markers;
 
@@ -72,6 +74,7 @@ namespace StateMachine
                     _buttonSlider.GetComponent<Image>().sprite = _infoSelected; // Желтая кнопка Info
                     MarkersVisible(true);
                     _canvasVideo.SetActive(false);
+                    DisactivateAllCanvasesSlider();
                     break;
 
                 case States.Slider:
@@ -86,6 +89,14 @@ namespace StateMachine
                     _canvasVideo.SetActive(true);
                     MarkersVisible(false);
                     break;
+            }
+        }
+
+        private void DisactivateAllCanvasesSlider()
+        {
+            foreach (var canvas in _canvasList)
+            {
+                canvas.SetActive(false);
             }
         }
 
