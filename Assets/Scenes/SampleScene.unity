@@ -17527,6 +17527,13 @@ MonoBehaviour:
   _canvasVideo: {fileID: 6535231536529818545}
   _canvasList:
   - {fileID: 1285783264483097855}
+  - {fileID: 349551339}
+  - {fileID: 1778634601}
+  - {fileID: 41379537}
+  - {fileID: 604402444}
+  - {fileID: 317089746}
+  - {fileID: 247639270}
+  - {fileID: 10184786}
   _markers: {fileID: 484173769}
   _buttonArrowLeft: {fileID: 113016724}
   _buttonSlider: {fileID: 554344826}
