@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace SliderPages
 {
@@ -40,7 +41,7 @@ namespace SliderPages
             GetFileLocation(pathToMainManument, MainManument);
             GetFileLocation(pathToSecondManument, SecondManument);
 
-            e_streamsLoaded();
+            e_streamsLoaded?.Invoke();
         }
 
         public void GetFileLocation(string pathToTexturesForMerkersSlider, List<Sprite> listSprites)
@@ -56,8 +57,12 @@ namespace SliderPages
                 return;
             }
 
-            // Получаем все файлы .png в директории
-            FileInfo[] allFiles = directoryInfo.GetFiles("*.png");
+            // Получаем все файлы .png, .jpg, и .jpeg в директории
+            FileInfo[] allFiles = directoryInfo.GetFiles("*.*")
+                                               .Where(file => file.Extension.Equals(".png", StringComparison.OrdinalIgnoreCase) ||
+                                                              file.Extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase) ||
+                                                              file.Extension.Equals(".jpeg", StringComparison.OrdinalIgnoreCase))
+                                               .ToArray();
 
             // Загружаем изображения и создаем спрайты
             foreach (FileInfo file in allFiles)

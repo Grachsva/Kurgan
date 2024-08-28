@@ -13,14 +13,18 @@ namespace SliderPages
         [SerializeField] private GameObject _page;
         [SerializeField] private GameObject verticalSlider;
 
-        private void Start()
+        private void OnEnable()
         {
             PagesStream.e_streamsLoaded += FindAllNeeded;
         }
 
+        private void OnDisable()
+        {
+            PagesStream.e_streamsLoaded -= FindAllNeeded;
+        }
+
         private void FindAllNeeded()
         {
-            Debug.Log("HELLO");
             _streams = FindObjectOfType<PagesStream>();
             _pagedRect = verticalSlider.GetComponentInChildren<PagedRect>();
             AddCountPages();
