@@ -14,7 +14,10 @@ namespace StateMachine
         [SerializeField] private Button buttonPlay;
         [SerializeField] private Button buttonInfo;
         [SerializeField] private List<Button> buttonsMarkers = new List<Button>();
-        [SerializeField] private Button buttonCloseCanvas;
+
+        [SerializeField] private List<Button> otherVariantCloseCanvas = new List<Button>();
+
+        //[SerializeField] private Button buttonCloseCanvas;
 
         private StateMachineButtons _stateMachine;
         private States _lastState;
@@ -27,7 +30,11 @@ namespace StateMachine
             //buttonLeftArrow.onClick.AddListener(() => GetComponent<StateMachineButtons>().ChangeState(States.WithoutMarkers));
             buttonPlay.onClick.AddListener(OnPlayButtonClick);
             buttonInfo.onClick.AddListener(OnInfoButtonClick);
-            buttonCloseCanvas.onClick.AddListener(OnInfoButtonClick);
+
+            foreach (var button in otherVariantCloseCanvas)
+            {
+                button.onClick.AddListener(OnInfoButtonClick);
+            }
 
             for (int i = 0; i < buttonsMarkers.Count; i++)
             {
