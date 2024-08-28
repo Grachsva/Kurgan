@@ -68,6 +68,7 @@ namespace SliderPages
         {
             Image imageInPage = page.gameObject.GetComponentInChildren<Image>();
             imageInPage.sprite = spriteList[numberSlide];
+            imageInPage.SetNativeSize();
         }
 
         private void UpdatePagedRects(PagedRect pagedRect)
