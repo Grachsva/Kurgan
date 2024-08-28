@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UI.Pagination;
@@ -7,11 +7,12 @@ namespace SliderPages
 {
     public class FillSlider : MonoBehaviour
     {
-        private PagedRect _pagedRect;
         private PagesStream _streams;
 
-        [SerializeField] private GameObject _page;
-        [SerializeField] private GameObject verticalSlider;
+        //[SerializeField] private GameObject _page;
+        [SerializeField] private GameObject[] verticalSliders; // Массив слайдеров
+
+        private Dictionary<int, List<Sprite>> _spriteDictionary; // Словарь для хранения списков спрайтов
 
         private void OnEnable()
         {
@@ -26,27 +27,55 @@ namespace SliderPages
         private void FindAllNeeded()
         {
             _streams = FindObjectOfType<PagesStream>();
-            _pagedRect = verticalSlider.GetComponentInChildren<PagedRect>();
-            AddCountPages();
-            _pagedRect.UpdatePages();
-            _pagedRect.UpdatePagination();
-            _pagedRect.UpdateDisplay();
-            _pagedRect.SetCurrentPage(1);
-        }
 
-        private void AddCountPages()
-        {
-            for (int i = 0; i < _streams.EntryWhiteMemorialSprites.Count; i++)
+            // Инициализация словаря с соответствующими списками спрайтов
+            _spriteDictionary = new Dictionary<int, List<Sprite>>
             {
-                Page newPage = _pagedRect.AddPageUsingTemplate();
-                AddImageInSlide(i, newPage);
+                { 0, _streams.EntryWhiteMemorialSprites },
+                { 1, _streams.EternalFlame },
+                { 2, _streams.FiveBlackMemorials }, 
+                { 3, _streams.TwoWhiteSculptures },
+                { 4, _streams.BlackMemorialBehindWhiteSculpture },
+                { 5, _streams.DivisionalGun },
+                { 6, _streams.MainManument },
+                { 7, _streams.SecondManument },
+                //{ 8, _streams.SpriteList9 },
+                //{ 9, _streams.SpriteList10 }
+            };
+
+            // Заполнение слайдеров
+            for (int i = 0; i < verticalSliders.Length; i++)
+            {
+                if (_spriteDictionary.TryGetValue(i, out List<Sprite> spriteList)) // Проверка наличия списка спрайтов
+                {
+                    var pagedRect = verticalSliders[i].GetComponentInChildren<PagedRect>();
+                    AddCountPages(pagedRect, spriteList);
+                    UpdatePagedRects(pagedRect);
+                }
             }
         }
 
-        private void AddImageInSlide(int numberSlide, Page page)
+        private void AddCountPages(PagedRect pagedRect, List<Sprite> spriteList)
+        {
+            for (int i = 0; i < spriteList.Count; i++)
+            {
+                Page newPage = pagedRect.AddPageUsingTemplate();
+                AddImageInSlide(i, newPage, spriteList);
+            }
+        }
+
+        private void AddImageInSlide(int numberSlide, Page page, List<Sprite> spriteList)
         {
             Image imageInPage = page.gameObject.GetComponentInChildren<Image>();
-            imageInPage.sprite = _streams.EntryWhiteMemorialSprites[numberSlide];
+            imageInPage.sprite = spriteList[numberSlide];
+        }
+
+        private void UpdatePagedRects(PagedRect pagedRect)
+        {
+            pagedRect.UpdatePages();
+            pagedRect.UpdatePagination();
+            pagedRect.UpdateDisplay();
+            pagedRect.SetCurrentPage(1);
         }
     }
 }

@@ -21,7 +21,7 @@ public class LookAt : MonoBehaviour
 
     private void Update()
     {
-        if (isConfig) 
+        //if (isConfig) 
             transform.LookAt(-Camera.main.transform.position);
         //transform.Rotate(-Camera.main.transform.position);
     }
