@@ -4,10 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StateMachine
+namespace SliderPages
 {
     public class PagesStream : MonoBehaviour
     {
+        public delegate void StreamsLoadedHandler();
+        public static event StreamsLoadedHandler e_streamsLoaded;
+
         private string pathToEntryWhiteMemorial = "1.EntryWhiteMemorial";
         private string pathToEternalFlame = "2.EternalFlame";
         private string pathToFiveBlackMemorials = "3.FiveBlackMemorials";
@@ -17,14 +20,14 @@ namespace StateMachine
         private string pathToMainManument = "7.MainManument";
         private string pathToSecondManument = "8.SecondManument";
 
-        [SerializeField] private List<Sprite> EntryWhiteMemorialSprites = new List<Sprite>();
-        [SerializeField] private List<Sprite> EternalFlame = new List<Sprite>();
-        [SerializeField] private List<Sprite> FiveBlackMemorials = new List<Sprite>();
-        [SerializeField] private List<Sprite> TwoWhiteSculptures = new List<Sprite>();
-        [SerializeField] private List<Sprite> BlackMemorialBehindWhiteSculpture = new List<Sprite>();
-        [SerializeField] private List<Sprite> DivisionalGun = new List<Sprite>();
-        [SerializeField] private List<Sprite> MainManument = new List<Sprite>();
-        [SerializeField] private List<Sprite> SecondManument = new List<Sprite>();
+        [SerializeField] public List<Sprite> EntryWhiteMemorialSprites = new List<Sprite>();
+        [SerializeField] public List<Sprite> EternalFlame = new List<Sprite>();
+        [SerializeField] public List<Sprite> FiveBlackMemorials = new List<Sprite>();
+        [SerializeField] public List<Sprite> TwoWhiteSculptures = new List<Sprite>();
+        [SerializeField] public List<Sprite> BlackMemorialBehindWhiteSculpture = new List<Sprite>();
+        [SerializeField] public List<Sprite> DivisionalGun = new List<Sprite>();
+        [SerializeField] public List<Sprite> MainManument = new List<Sprite>();
+        [SerializeField] public List<Sprite> SecondManument = new List<Sprite>();
 
         private void Start()
         {
@@ -36,6 +39,8 @@ namespace StateMachine
             GetFileLocation(pathTo76mmDivisionalGun, DivisionalGun);
             GetFileLocation(pathToMainManument, MainManument);
             GetFileLocation(pathToSecondManument, SecondManument);
+
+            e_streamsLoaded();
         }
 
         public void GetFileLocation(string pathToTexturesForMerkersSlider, List<Sprite> listSprites)
@@ -47,7 +52,7 @@ namespace StateMachine
             // Проверяем, существует ли директория
             if (!directoryInfo.Exists)
             {
-                Debug.LogError("Directory not found: " + fullPath);
+                //Debug.LogError("Directory not found: " + fullPath);
                 return;
             }
 
@@ -72,7 +77,7 @@ namespace StateMachine
                 listSprites.Add(sprite);
             }
 
-            Debug.Log("Loaded " + listSprites.Count + " sprites.");
+            //Debug.Log("Loaded " + listSprites.Count + " sprites.");
         }
     }
 }
