@@ -15,6 +15,7 @@ namespace StateMachine
         [SerializeField] private Button buttonInfo;
         [SerializeField] private List<Button> buttonsMarkers = new List<Button>();
 
+        //для канвасов (клик в пустом месте) и крестиков в углу канвасов
         [SerializeField] private List<Button> otherVariantCloseCanvas = new List<Button>();
 
         //[SerializeField] private Button buttonCloseCanvas;
