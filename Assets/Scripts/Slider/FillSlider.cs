@@ -2,9 +2,23 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UI.Pagination;
+using TMPro;
+using System;
 
 namespace SliderPages
 {
+    [System.Serializable]
+    public class PageTextData
+    {
+        public string EntryWhiteMemorialSprites;
+        public string EternalFlame;
+        public string FiveBlackMemorials;
+        public string TwoWhiteSculptures;
+        public string BlackMemorialBehindWhiteSculpture;
+        public string DivisionalGun;
+        public string MainManument;
+        public string SecondManument;
+    }
 
 
     public class FillSlider : MonoBehaviour
@@ -26,6 +40,18 @@ namespace SliderPages
             PagesStream.e_streamsLoaded -= FindAllNeeded;
         }
 
+        private PageTextData LoadTextData()
+        {
+            string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "SlidersText.json");
+
+            // Чтение содержимого файла
+            string json = System.IO.File.ReadAllText(filePath);
+
+            // Десериализация JSON в объект
+            return JsonUtility.FromJson<PageTextData>(json);
+        }
+
+
         private void FindAllNeeded()
         {
             _streams = FindObjectOfType<PagesStream>();
@@ -35,14 +61,28 @@ namespace SliderPages
             {
                 { 0, _streams.EntryWhiteMemorialSprites },
                 { 1, _streams.EternalFlame },
-                { 2, _streams.FiveBlackMemorials }, 
+                { 2, _streams.FiveBlackMemorials },
                 { 3, _streams.TwoWhiteSculptures },
                 { 4, _streams.BlackMemorialBehindWhiteSculpture },
                 { 5, _streams.DivisionalGun },
                 { 6, _streams.MainManument },
                 { 7, _streams.SecondManument },
-                //{ 8, _streams.SpriteList9 },
-                //{ 9, _streams.SpriteList10 }
+            };
+
+            // Загружаем текст для страниц
+            PageTextData textData = LoadTextData();
+
+            // Создаем словарь, который будет связывать индексы с текстами
+            Dictionary<int, string> textDictionary = new Dictionary<int, string>
+            {
+                { 0, textData.EntryWhiteMemorialSprites },
+                { 1, textData.EternalFlame },
+                { 2, textData.FiveBlackMemorials },
+                { 3, textData.TwoWhiteSculptures },
+                { 4, textData.BlackMemorialBehindWhiteSculpture },
+                { 5, textData.DivisionalGun },
+                { 6, textData.MainManument },
+                { 7, textData.SecondManument }
             };
 
             // Заполнение слайдеров
@@ -51,26 +91,41 @@ namespace SliderPages
                 if (_spriteDictionary.TryGetValue(i, out List<Sprite> spriteList)) // Проверка наличия списка спрайтов
                 {
                     var pagedRect = verticalSliders[i].GetComponentInChildren<PagedRect>();
-                    AddCountPages(pagedRect, spriteList);
+                    AddCountPages(pagedRect, spriteList, textDictionary.ContainsKey(i) ? textDictionary[i] : ""); // Используем текст из словаря
                     UpdatePagedRects(pagedRect);
                 }
             }
         }
 
-        private void AddCountPages(PagedRect pagedRect, List<Sprite> spriteList)
+        private void AddCountPages(PagedRect pagedRect, List<Sprite> spriteList, string pageText)
         {
             for (int i = 0; i < spriteList.Count; i++)
             {
                 Page newPage = pagedRect.AddPageUsingTemplate();
-                AddImageInSlide(i, newPage, spriteList);
+                AddImageInSlide(i, newPage, spriteList, pageText);
             }
         }
 
-        private void AddImageInSlide(int numberSlide, Page page, List<Sprite> spriteList)
+        private void AddImageInSlide(int numberSlide, Page page, List<Sprite> spriteList, string pageText)
         {
             Image imageInPage = page.gameObject.GetComponentInChildren<Image>();
             imageInPage.sprite = spriteList[numberSlide];
-            
+
+            // Добавляем текст на страницу
+            TextMeshProUGUI textInPage = page.gameObject.GetComponentInChildren<TextMeshProUGUI>(true);
+            if (textInPage != null)
+            {
+                print(pageText);
+                if(pageText != null)
+                {
+                    textInPage.text = pageText;
+                    textInPage.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                Debug.Log("Текст не найден");
+            }
 
             // Получаем RectTransform для изменения его свойств
             RectTransform rectTransform = imageInPage.GetComponent<RectTransform>();
@@ -82,24 +137,12 @@ namespace SliderPages
             // Проверяем, шире ли изображение, чем оно высоко
             if (spriteWidth > spriteHeight)
             {
-                ////imageInPage.SetNativeSize();
-                //// Привязка к верхней части и центр по X
-                //rectTransform.anchorMin = new Vector2(0.5f, 1); // Центр по X, верх по Y
-                //rectTransform.anchorMax = new Vector2(0.5f, 1); // Центр по X, верх по Y
-                //rectTransform.anchoredPosition = new Vector2(0, 0); // Позиция по центру по X и привязка к верхней части
-                ////rectTransform.anchoredPosition = new Vector2(0, -spriteHeight / 2); // Сместите вниз, если изображение широкое
-
                 rectTransform.SetAnchor(AnchorPresets.TopCenter);
                 rectTransform.SetAnchor(AnchorPresets.TopCenter, 0, 0);
                 rectTransform.SetPivot(PivotPresets.TopCenter);
             }
             else
             {
-                // Если изображение не шире, чем высоко, можно установить другую привязку
-                //rectTransform.anchorMin = new Vector2(0.5f, 0.5f); // Центр по X и Y
-                //rectTransform.anchorMax = new Vector2(0.5f, 0.5f); // Центр по X и Y
-                //rectTransform.anchoredPosition = new Vector2(0, 0); // Позиция по центру
-
                 rectTransform.SetAnchor(AnchorPresets.MiddleCenter);
                 rectTransform.SetAnchor(AnchorPresets.MiddleCenter, 0, 0);
                 rectTransform.SetPivot(PivotPresets.MiddleCenter);
