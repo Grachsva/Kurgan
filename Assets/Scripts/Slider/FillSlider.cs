@@ -103,6 +103,11 @@ namespace SliderPages
             {
                 Page newPage = pagedRect.AddPageUsingTemplate();
                 AddImageInSlide(i, newPage, spriteList, pageText);
+
+                if (spriteList.Count <= 1)
+                {
+                    pagedRect.ShowPagination = false;
+                }
             }
         }
 
@@ -115,10 +120,20 @@ namespace SliderPages
             TextMeshProUGUI textInPage = page.gameObject.GetComponentInChildren<TextMeshProUGUI>(true);
             if (textInPage != null)
             {
-                print(pageText);
-                if(pageText != null)
+                string spriteName = imageInPage.sprite.name;
+                if (spriteName.Contains("Frame"))
                 {
-                    textInPage.text = pageText;
+                    if (pageText != null)
+                    {
+                        textInPage.text = pageText;
+                        textInPage.gameObject.SetActive(true);
+                    }
+                }
+                else
+                {
+                    spriteName = System.Text.RegularExpressions.Regex.Replace(spriteName, @"\(\d+\)", ""); // @"\(\d+\)", "");
+                    spriteName = spriteName.Replace('\'', '\"');
+                    textInPage.text = spriteName;
                     textInPage.gameObject.SetActive(true);
                 }
             }
