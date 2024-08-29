@@ -5,6 +5,8 @@ using UI.Pagination;
 
 namespace SliderPages
 {
+
+
     public class FillSlider : MonoBehaviour
     {
         private PagesStream _streams;
