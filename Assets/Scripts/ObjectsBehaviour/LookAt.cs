@@ -22,7 +22,15 @@ public class LookAt : MonoBehaviour
     private void Update()
     {
         //if (isConfig) 
-            transform.LookAt(-Camera.main.transform.position);
+        //transform.LookAt(-Camera.main.transform.position);
+        // Получаем позицию камеры
+        Vector3 cameraPosition = Camera.main.transform.position;
+        // Направление от объекта к камере
+        Vector3 directionToCamera = cameraPosition - transform.position;
+        // Поворачиваем направление на 180 градусов
+        Vector3 directionAwayFromCamera = -directionToCamera;
+        // Устанавливаем направление взгляда объекта
+        transform.LookAt(transform.position + directionAwayFromCamera);
         //transform.Rotate(-Camera.main.transform.position);
     }
 }
