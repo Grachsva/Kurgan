@@ -15,7 +15,7 @@ namespace Config
             if (PlayerPrefs.GetInt("CameraSpeed") == 0)
             {
                 Debug.Log("Значение пустое и было выставлено с: " + PlayerPrefs.GetInt("CameraSpeed"));
-                PlayerPrefs.SetInt("CameraSpeed", 1);
+                PlayerPrefs.SetInt("CameraSpeed", 5);
             }
             _speedSlider.value = PlayerPrefs.GetInt("CameraSpeed");
             _speedText.text = "Скорость: " + PlayerPrefs.GetInt("CameraSpeed");
