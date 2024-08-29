@@ -812,6 +812,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &21197933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1271,6 +1283,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &31388595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4093,7 +4117,19 @@ MonoBehaviour:
   ShowOnPagination: 1
   OnShowEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 180
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHideEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5788,7 +5824,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 247639271}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 180
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &247639274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6839,7 +6887,19 @@ MonoBehaviour:
   ShowOnPagination: 1
   OnShowEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 45
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHideEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -9278,6 +9338,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &385697662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13298,6 +13370,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &571249261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17569,6 +17653,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4137b0a323956874387ea5d965977db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeRemaining: 0
+  timerIsRunning: 0
   _canvasVideo: {fileID: 6535231536529818545}
   _canvasList:
   - {fileID: 1285783264483097855}
@@ -17594,6 +17680,7 @@ MonoBehaviour:
   _infoDis: {fileID: 21300000, guid: e3a400b77018fa249985f239c3c0aba2, type: 3}
   _playDis: {fileID: 21300000, guid: c836f71558510d04abbac17a974a5d40, type: 3}
   _arrowRightDis: {fileID: 21300000, guid: e6ee997bfa9ccbf4aaddcc8d8127cc94, type: 3}
+  _lastState: 0
   _currentState: 0
 --- !u!4 &768810582
 Transform:
@@ -20367,6 +20454,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &871849185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22716,7 +22815,19 @@ MonoBehaviour:
   ShowOnPagination: 1
   OnShowEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 45
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHideEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -25744,7 +25855,19 @@ MonoBehaviour:
   ShowOnPagination: 1
   OnShowEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 45
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHideEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -26009,6 +26132,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1065268435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26412,6 +26547,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1082367647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31856,6 +32003,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1301594225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34908,6 +35067,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1398415033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35841,6 +36012,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1435834002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37226,7 +37409,19 @@ MonoBehaviour:
   ShowOnPagination: 1
   OnShowEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 45
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHideEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -39695,6 +39890,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1593634221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40713,7 +40920,19 @@ MonoBehaviour:
   ShowOnPagination: 1
   OnShowEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 45
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHideEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -43057,6 +43276,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1768451917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44145,6 +44376,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1803637239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47031,7 +47274,19 @@ MonoBehaviour:
   ShowOnPagination: 1
   OnShowEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 45
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHideEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -48169,6 +48424,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1973933049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54447,7 +54714,19 @@ MonoBehaviour:
   ShowOnPagination: 1
   OnShowEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 45
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHideEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -56223,6 +56502,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3836072763003968594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59760,6 +60051,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &7107186345186264169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -60243,7 +60546,19 @@ MonoBehaviour:
   ShowOnPagination: 1
   OnShowEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 768810581}
+        m_TargetAssemblyTypeName: StateMachine.StateMachineButtons, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 180
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHideEvent:
     m_PersistentCalls:
       m_Calls: []

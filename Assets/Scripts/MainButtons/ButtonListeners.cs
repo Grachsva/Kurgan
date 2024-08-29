@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UI.Pagination;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,6 @@ namespace StateMachine
     //[InitializeOnLoad]
     public class ButtonListeners : MonoBehaviour
     {
-        //[SerializeField] private Button buttonLeftArrow;
         [SerializeField] private Button buttonPlay;
         [SerializeField] private Button buttonInfo;
         [SerializeField] private List<Button> buttonsMarkers = new List<Button>();
@@ -31,6 +31,9 @@ namespace StateMachine
             //buttonLeftArrow.onClick.AddListener(() => GetComponent<StateMachineButtons>().ChangeState(States.WithoutMarkers));
             buttonPlay.onClick.AddListener(OnPlayButtonClick);
             buttonInfo.onClick.AddListener(OnInfoButtonClick);
+
+            //buttonLeftArrow.onClick.AddListener(ResetTimerOnArrow);
+            //buttonRightArrow.onClick.AddListener(ResetTimerOnArrow);
 
             foreach (var button in otherVariantCloseCanvasInfo)
             {
