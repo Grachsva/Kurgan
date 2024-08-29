@@ -136,6 +136,13 @@ namespace SliderPages
                     textInPage.text = spriteName;
                     textInPage.gameObject.SetActive(true);
                 }
+                if (spriteList.Count <= 1)
+                {
+                    Vector2 sizeTextRect = textInPage.GetComponent<RectTransform>().sizeDelta;
+                    textInPage.GetComponent<RectTransform>().sizeDelta = new Vector2(2000, sizeTextRect.y);
+                    if (pageText.Length > 300)
+                        textInPage.verticalAlignment = VerticalAlignmentOptions.Bottom;
+                }
             }
             else
             {
