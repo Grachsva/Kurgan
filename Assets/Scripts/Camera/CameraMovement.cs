@@ -86,8 +86,8 @@ namespace Buttons
             _camera.transform.position = Vector3.Slerp(_camera.transform.position, target.position, step);
             _camera.transform.rotation = Quaternion.Slerp(_camera.transform.rotation, target.rotation, step);
 
-            if (Vector3.Distance(_camera.transform.position, target.position) < 1f &&
-                Quaternion.Angle(_camera.transform.rotation, target.rotation) < 1f)
+            if (Vector3.Distance(_camera.transform.position, target.position) < 0.1 &&
+                Quaternion.Angle(_camera.transform.rotation, target.rotation) < 0.1f)
             {
                 _isMoving = false;
             }
