@@ -41,6 +41,10 @@ namespace SliderPages
         {
             for (int i = 0; i < _streams.VideoFiles.Count; i++)
             {
+                if (_streams.VideoFiles.Count == 1)
+                {
+                    _pagedRect.ShowPagination = false;
+                }
                 Page newPage = _pagedRect.AddPageUsingTemplate();
                 AddVideoInSlide(i, newPage);
             }
