@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using UI.Pagination;
+using TMPro; 
 
 namespace SliderPages
 {
@@ -59,9 +60,26 @@ namespace SliderPages
                 return;
             }
 
+            // Получаем путь к видеофайлу
             string videoPath = _streams.VideoFiles[numberSlide];
+            // Извлекаем имя файла без расширения
+            string videoFileName = Path.GetFileNameWithoutExtension(videoPath);
+
+            // Устанавливаем URL для VideoPlayer
             videoPlayer.url = videoPath;
             videoPlayer.Play();
+
+            // Ищем компонент TextMeshPro на странице
+            TextMeshProUGUI textMeshPro = page.gameObject.GetComponentInChildren<TextMeshProUGUI>();
+            if (textMeshPro != null)
+            {
+                // Устанавливаем текст как имя видеофайла
+                textMeshPro.text = videoFileName;
+            }
+            else
+            {
+                Debug.LogError("No TextMeshPro component found on the page.");
+            }
         }
     }
 }
