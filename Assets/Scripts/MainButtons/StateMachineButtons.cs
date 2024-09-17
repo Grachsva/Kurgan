@@ -155,7 +155,7 @@ namespace StateMachine
             foreach (var button in sprites.Keys)
             {
                 button.sprite = sprites[button];
-                print(button.name);
+                //print(button.name);
                 ButtonLeft buttonLeft = button.GetComponent<ButtonLeft>();
                 ButtonRight buttonRight = button.GetComponent<ButtonRight>();
 
