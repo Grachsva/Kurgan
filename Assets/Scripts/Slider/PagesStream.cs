@@ -18,12 +18,11 @@ namespace SliderPages
         private string pathToTwoWhiteSculptures = "4.TwoWhiteSculptures";
         private string pathToBlackMemorialBehindWhiteSculpture = "5.BlackMemorialBehindWhiteSculpture";
         private string pathTo76mmDivisionalGun = "6.76mmDivisionalGun";
-        //private string pathToMainManument = "7.MainManument";
+        private string pathToMainManument = "7.MainManument";
         private string pathToSecondManument = "8.SecondManument";
 
         private string pathToVideoMainManument = "7.MainManument";
         private string pathToVideoStartSquare = "9.StartSquare";
-
         private string pathToVideoMainButton = "Video";
 
         [SerializeField] public List<Sprite> EntryWhiteMemorialSprites = new List<Sprite>();
@@ -32,7 +31,7 @@ namespace SliderPages
         [SerializeField] public List<Sprite> TwoWhiteSculptures = new List<Sprite>();
         [SerializeField] public List<Sprite> BlackMemorialBehindWhiteSculpture = new List<Sprite>();
         [SerializeField] public List<Sprite> DivisionalGun = new List<Sprite>();
-        //[SerializeField] public List<Sprite> MainManument = new List<Sprite>(); // замена на видео
+        [SerializeField] public List<Sprite> MainManument = new List<Sprite>(); // замена на видео
         [SerializeField] public List<Sprite> SecondManument = new List<Sprite>();
 
         [SerializeField] public List<string> VideoFileMainManument = new List<string>();
@@ -48,7 +47,7 @@ namespace SliderPages
             GetFileLocation(pathToTwoWhiteSculptures, TwoWhiteSculptures);
             GetFileLocation(pathToBlackMemorialBehindWhiteSculpture, BlackMemorialBehindWhiteSculpture);
             GetFileLocation(pathTo76mmDivisionalGun, DivisionalGun);
-            //GetFileLocation(pathToMainManument, MainManument);
+            GetFileLocation(pathToMainManument, MainManument);
             GetFileLocation(pathToSecondManument, SecondManument);
 
             GetVideoFileLocation(pathToVideoMainManument, VideoFileMainManument);

@@ -16,7 +16,7 @@ namespace SliderPages
         public string TwoWhiteSculptures;
         public string BlackMemorialBehindWhiteSculpture;
         public string DivisionalGun;
-        //public string MainManument;
+        public string MainManument;
         public string SecondManument;
     }
 
@@ -65,8 +65,8 @@ namespace SliderPages
                 { 3, _streams.TwoWhiteSculptures },
                 { 4, _streams.BlackMemorialBehindWhiteSculpture },
                 { 5, _streams.DivisionalGun },
-                //{ 6, _streams.MainManument },
-                { 6, _streams.SecondManument },
+                { 6, _streams.MainManument },
+                { 7, _streams.SecondManument },
             };
 
             // Загружаем текст для страниц
@@ -81,8 +81,8 @@ namespace SliderPages
                 { 3, textData.TwoWhiteSculptures },
                 { 4, textData.BlackMemorialBehindWhiteSculpture },
                 { 5, textData.DivisionalGun },
-                //{ 6, textData.MainManument },
-                { 6, textData.SecondManument }
+                { 6, textData.MainManument },
+                { 7, textData.SecondManument }
             };
 
             // Заполнение слайдеров
