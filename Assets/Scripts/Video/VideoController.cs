@@ -16,18 +16,21 @@ public class VideoController : MonoBehaviour
         _playButton.SetActive(true);
         _player = GetComponent<VideoPlayer>();
         _player.loopPointReached += EndReached;
+
+        _player.frame = 100;
+        Debug.Log("Set Frame сработал");
     }
 
-    public void SetFrame(int frame)
-    {
-        _player.frame = frame;
-        //GetComponent<VideoPlayer>().frame = frame;
-    }
+    //public void SetFrame(int frame)
+    //{
+    //    _player.frame = frame;
+    //    Debug.Log("Set Frame сработал");
+    //    //GetComponent<VideoPlayer>().frame = frame;
+    //}
 
     void EndReached(UnityEngine.Video.VideoPlayer vp)
     {
         _playButton.SetActive(true);
         _player.frame = 100;
     }
-
 }
